@@ -11,39 +11,36 @@ function playRound(computer, user) {
     switch(user) {
         case 1:
             if(computer == "rock") {     
-                result = "you chose " + user + "\n" + "computer chose " + computer + "\n" + "It's a draw";
+                result = "you chose " + sel[user - 1] + "\n" + "computer chose " + computer + "\n" + "It's a draw";
                 return result;
             } else {
-                result = "you chose " + user + "\n" + "computer chose " + computer + "\n" + "You win";
+                result = "you chose " + sel[user - 1] + "\n" + "computer chose " + computer + "\n" + "You win";
                 return result;
             }
-            
         break;
         case 2:
             if(computer == "paper") {
-                result = "you chose " + user + "\n" + "computer chose " + computer + "\n" + "It's a draw";
+                result = "you chose " + sel[user - 1] + "\n" + "computer chose " + computer + "\n" + "It's a draw";
                 return result;
             } else if(computer == "rock") {
-                result = "you chose " + user + "\n" + "computer chose " + computer + "\n" + "You win";
+                result = "you chose " + sel[user - 1] + "\n" + "computer chose " + computer + "\n" + "You win";
                 return result;
             } else if(computer == "scissors") {
-                result = "you chose " + user + "\n" + "computer chose " + computer + "\n" + "You lose";
+                result = "you chose " + sel[user - 1] + "\n" + "computer chose " + computer + "\n" + "You lose";
                 return result;
             }
-
         break;
         case 3:
             if(computer == "scissors") {
-                result = "you chose " + user + "\n" + "computer chose " + computer + "\n" + "It's a draw";
+                result = "you chose " + sel[user - 1] + "\n" + "computer chose " + computer + "\n" + "It's a draw";
                 return result;
             } else if(computer == "rock") {
-                result = "you chose " + user + "\n" + "computer chose " + computer + "\n" + "You lose";
+                result = "you chose " + sel[user - 1] + "\n" + "computer chose " + computer + "\n" + "You lose";
                 return result;
             } else if(computer == "paper") {
-                result = "you chose " + user + "\n" + "computer chose " + computer + "\n" + "You win";
+                result = "you chose " + sel[user - 1] + "\n" + "computer chose " + computer + "\n" + "You win";
                 return result;
             }
-
         break;
     }
 
