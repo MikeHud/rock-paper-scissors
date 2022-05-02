@@ -1,22 +1,23 @@
 const sel = ["rock", "paper", "scissors"];
-let userSel = parseInt(prompt("select 1.Rock 2.Paper 3.Scissors"));
+let userSel = prompt("type rock, paper or scissors");
 const computerSel = computerPlay();
 const winMsg = "You win!";
 const loseMsg = "You lose!";
 const drawMsg = "It's a draw";
 
+console.log(userSel);
 function computerPlay() {
     return sel[Math.floor(Math.random() * 3)];
 }
 
 function displayResults(computer,user) { 
-    return "you chose " + sel[user - 1] + "\n" + "computer chose " + computer + "\n"
+    return "you chose " + user + "\n" + "computer chose " + computer + "\n"
 }
 
 function playRound(computer, user) {
     let result = "";
     switch(user) {
-        case 1:
+        case "rock":
             if(computer == "rock") {     
                 result = displayResults(computer,user) + drawMsg;
                 return result;
@@ -25,7 +26,7 @@ function playRound(computer, user) {
                 return result;
             }
         break;
-        case 2:
+        case "paper":
             if(computer == "paper") {
                 result = displayResults(computer,user)+ drawMsg;
                 return result;
@@ -37,7 +38,7 @@ function playRound(computer, user) {
                 return result;
             }
         break;
-        case 3:
+        case "scissors":
             if(computer == "scissors") {
                 result = displayResults(computer,user) + drawMsg;
                 return result;
