@@ -3,15 +3,11 @@ let userSel = prompt("type rock, paper or scissors");
 const computerSel = computerPlay();
 const winMsg = "You win!";
 const loseMsg = "You lose!";
-const drawMsg = "It's a draw";
+const drawMsg = "It's a draw!";
 
 console.log(userSel);
 function computerPlay() {
     return sel[Math.floor(Math.random() * 3)];
-}
-
-function displayResults(computer,user) { 
-    return "you chose " + user + "\n" + "computer chose " + computer + "\n"
 }
 
 function playRound(computer, user) {
@@ -19,34 +15,34 @@ function playRound(computer, user) {
     switch(user) {
         case "rock":
             if(computer == "rock") {     
-                result = displayResults(computer,user) + drawMsg;
+                result = drawMsg + " " + user + " " + "draws with " + computer;
                 return result;
             } else {
-                result = displayResults(computer,user) + winMsg;
+                result = winMsg + " " + user + " " + "beats " + computer;
                 return result;
             }
         break;
         case "paper":
             if(computer == "paper") {
-                result = displayResults(computer,user)+ drawMsg;
+                result = drawMsg + " " + user + " " + "draws with " + computer;
                 return result;
             } else if(computer == "rock") {
-                result = displayResults(computer,user) + winMsg;
+                result = winMsg + " " + user + " " + "beats " + computer;
                 return result;
             } else if(computer == "scissors") {
-                result = displayResults(computer,user) + loseMsg;
+                result = loseMsg + " " + computer + " " + "beats " + user;
                 return result;
             }
         break;
         case "scissors":
             if(computer == "scissors") {
-                result = displayResults(computer,user) + drawMsg;
+                result = drawMsg + " " + user + " " + "draws with " + computer;
                 return result;
             } else if(computer == "rock") {
-                result = displayResults(computer,user) + loseMsg;
+                result = loseMsg + " " + computer + " " + "beats " + user;
                 return result;
             } else if(computer == "paper") {
-                result = displayResults(computer,user) + winMsg;
+                result = winMsg + " " + user + " " + "beats " + computer;
                 return result;
             }
         break;
