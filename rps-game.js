@@ -1,5 +1,5 @@
 const sel = ["rock", "paper", "scissors"];
-let userSel = prompt("type rock, paper or scissors");
+let userSel = prompt("type rock, paper or scissors").toLowerCase();
 const computerSel = computerPlay();
 const winMsg = "You win!";
 const loseMsg = "You lose!";
