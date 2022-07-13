@@ -1,19 +1,20 @@
 //global variables 
-const sel = ["rock", "paper", "scissors"];
 const winMsg = "You win!";
 const loseMsg = "You lose!";
 const drawMsg = "It's a draw!";
+let rounds = 2;
 
 function computerSel() { //computer chooses rock, paper, scissors at random 
+    const sel = ["rock", "paper", "scissors"];
     return sel[Math.floor(Math.random() * 3)];
 }
 
-function userSel() {
-    userSel = prompt("type rock, paper or scissors").toLowerCase();
-    return userSel;
+function userSel() { //gets selection from user promt
+    sel = prompt("type rock, paper or scissors").toLowerCase();
+    return sel;
 }
 
-function playRound(computer, user) { //game logic. Input from user and computer
+function playRound(computer, user) { //game logic. One round
     let result = "";
     switch(user) {
         case "rock":
@@ -37,13 +38,13 @@ function playRound(computer, user) { //game logic. Input from user and computer
                 return result;
             } else if(computer == "scissors") {
                 result = loseMsg + " " + computer + " " + "beats " + user;
-                return result;
+                return result; 
             }
         break;
         case "scissors":
             if(computer == "scissors") {
                 result = drawMsg + " " + user + " " + "draws with " + computer;
-                return result;
+                return result;  
             } else if(computer == "rock") {
                 result = loseMsg + " " + computer + " " + "beats " + user;
                 return result;
@@ -55,15 +56,14 @@ function playRound(computer, user) { //game logic. Input from user and computer
     }
 }
 
-function game() { //Play the game i rounds, announce winner
+function game(rounds) { //Play the game i rounds, announce winner
 let userScore = 0;
 let computerScore = 0;
 let game = [""]; //store the results of 5 rounds in an array 
 
-    for (let i = 1; i <= 1; i++) { //play i number of rounds and announce winner at end
+    for (let i = 1; i <= rounds; i++) { //play i number of rounds and announce winner at end
     console.log("Round" + i); 
-    userSel();
-    game[i-1] = playRound(computerSel(), userSel); //run game i
+    game[i-1] = playRound(computerSel(), userSel()); //run game i
         if (game[i-1].includes("win")) { //maybe a clunky way to trigger score tally?
             console.log(game[i-1]);
             userScore = userScore + 1;
@@ -74,7 +74,7 @@ let game = [""]; //store the results of 5 rounds in an array
             console.log(game[i-1]);
         }
 
-        if (i == 5) { //After 5 rounds display the scores/winner
+        if (i == rounds) { //After 5 rounds display the scores/winner
             console.log("You score " + userScore);
             console.log("computer scores " + computerScore);
             if(computerScore > userScore) {
@@ -88,4 +88,4 @@ let game = [""]; //store the results of 5 rounds in an array
     } 
 }
 
-game();
+game(rounds); 
