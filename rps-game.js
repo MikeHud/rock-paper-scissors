@@ -2,90 +2,109 @@
 const winMsg = "You win!";
 const loseMsg = "You lose!";
 const drawMsg = "It's a draw!";
-let rounds = 2;
+let userSel = "";
+let result = "";
+let roundCount = 0;
+
+let userScore = 0;
+let computerScore = 0;
 
 function computerSel() { //computer chooses rock, paper, scissors at random 
     const sel = ["rock", "paper", "scissors"];
     return sel[Math.floor(Math.random() * 3)];
 }
+function pollUserInput() { //take user's input and trigger game play
+    const rockBtn = document.querySelector('#r');
+    rockBtn.addEventListener('click', () => {
+        userSel = "rock";
+        playRound(computerSel(), userSel);
+    });  
 
-function userSel() { //gets selection from user promt
-    sel = prompt("type rock, paper or scissors").toLowerCase();
-    return sel;
+    const paperBtn = document.querySelector('#p');
+    paperBtn.addEventListener('click', () => {
+        userSel = "paper";
+        playRound(computerSel(), userSel);
+    }); 
+
+    const scissorsBtn = document.querySelector('#s');
+    scissorsBtn.addEventListener('click', () => {
+        userSel = "scissors";
+        playRound(computerSel(), userSel);
+    }); 
 }
 
 function playRound(computer, user) { //game logic. One round
-    let result = "";
+    document.getElementById("display-winner").innerHTML = "";
     switch(user) {
         case "rock":
             if(computer == "rock") {     
-                result = drawMsg + " " + user + " " + "draws with " + computer;
-                return result;
+                result = user + " " + "draws with " + computer;
+                displayResult(result); 
+                roundCount++;
             } else if(computer == "paper") {
-                result = loseMsg + " " + computer + " " + "beats " + user;
-                return result;
+                result = computer + " " + "beats " + user;
+                computerScore++;
+                roundCount++;
+                displayResult(result);
             } else if(computer == "scissors") {
-                result = winMsg + " " + user + " " + "beats " + computer;
-                return result;
+                result = user + " " + "beats " + computer;
+                userScore++;
+                roundCount++;
+                displayResult(result);
             }
         break;
         case "paper":
             if(computer == "paper") {
-                result = drawMsg + " " + user + " " + "draws with " + computer;
-                return result;
+                result = user + " " + "draws with " + computer;
+                roundCount++;
+                displayResult(result);
             } else if(computer == "rock") {
-                result = winMsg + " " + user + " " + "beats " + computer;
-                return result;
+                result = user + " " + "beats " + computer;
+                userScore++;
+                roundCount++;
+                displayResult(result);
             } else if(computer == "scissors") {
-                result = loseMsg + " " + computer + " " + "beats " + user;
-                return result; 
+                result = computer + " " + "beats " + user;
+                computerScore++;
+                roundCount++;
+                displayResult(result);
             }
         break;
         case "scissors":
             if(computer == "scissors") {
                 result = drawMsg + " " + user + " " + "draws with " + computer;
-                return result;  
+                roundCount++;
+                displayResult(result);
             } else if(computer == "rock") {
                 result = loseMsg + " " + computer + " " + "beats " + user;
-                return result;
+                computerScore++;
+                roundCount++;
+                displayResult(result);
             } else if(computer == "paper") {
                 result = winMsg + " " + user + " " + "beats " + computer;
-                return result;
-            }
-        break;
+                userScore++;
+                roundCount++;
+                displayResult(result);
+            }  
+        break;  
     }
 }
-
-function game(rounds) { //Play the game i rounds, announce winner
-let userScore = 0;
-let computerScore = 0;
-let game = [""]; //store the results of 5 rounds in an array 
-
-    for (let i = 1; i <= rounds; i++) { //play i number of rounds and announce winner at end
-    console.log("Round" + i); 
-    game[i-1] = playRound(computerSel(), userSel()); //run game i
-        if (game[i-1].includes("win")) { //maybe a clunky way to trigger score tally?
-            console.log(game[i-1]);
-            userScore = userScore + 1;
-        } else if (game[i-1].includes("lose")) {
-            console.log(game[i-1]);
-            computerScore = computerScore + 1;
-        } else if (game[i-1].includes("draw")) {
-            console.log(game[i-1]);
+function displayResult(resultString) { //display scores and winner of 5 rounds
+    document.getElementById("round-result").innerHTML = result;
+    document.getElementById("user-score").innerHTML = userScore;
+    document.getElementById("computer-score").innerHTML = computerScore;
+    if(roundCount >= 5) {
+        if(userScore > computerScore) {
+            document.getElementById("display-winner").innerHTML = "<span style= 'color: green'>You Win!</span>";
+        } else if(userScore < computerScore) {
+            document.getElementById("display-winner").innerHTML = "<span style= 'color: red'>You lose! </span>";
+        } else{
+            document.getElementById("display-winner").innerHTML = "<span style = 'color: cornflowerblue'>It's a draw! </span>";
         }
-
-        if (i == rounds) { //After 5 rounds display the scores/winner
-            console.log("You score " + userScore);
-            console.log("computer scores " + computerScore);
-            if(computerScore > userScore) {
-                console.log("---Computer wins that round---");
-            } else if (computerScore < userScore) {
-                console.log("---You win that round---");
-            } else {
-                console.log("---Looks like draw---");
-            }
-        }
-    } 
+        userScore = 0;
+        computerScore = 0;
+        roundCount = 0;
+    }
 }
-
-game(rounds); 
+//game round is triggered by user input
+pollUserInput();
