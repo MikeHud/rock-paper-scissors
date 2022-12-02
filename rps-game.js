@@ -1,30 +1,25 @@
-//global variables 
-const winMsg = "You win!";
-const loseMsg = "You lose!";
-const drawMsg = "It's a draw!";
+
 let userSel = "";
 let result = "";
-
 let userScore = 0;
 let computerScore = 0;
 
-function computerSel() { //computer chooses rock, paper, scissors at random 
+function computerSel() { //computer chooses rock, paper, scissors
     const sel = ["rock", "paper", "scissors"];
     return sel[Math.floor(Math.random() * 3)];
 }
-function pollUserInput() { //take user's input and trigger game play
+
+function pollUserInput() { //list for user choice and trigger game round
     const rockBtn = document.querySelector('#r');
     rockBtn.addEventListener('click', () => {
         userSel = "rock";
         playRound(computerSel(), userSel);
     });  
-
     const paperBtn = document.querySelector('#p');
     paperBtn.addEventListener('click', () => {
         userSel = "paper";
         playRound(computerSel(), userSel);
     }); 
-
     const scissorsBtn = document.querySelector('#s');
     scissorsBtn.addEventListener('click', () => {
         userSel = "scissors";
@@ -65,27 +60,28 @@ function playRound(computer, user) { //game logic. One round
         break;
         case "scissors":
             if(computer == "scissors") {
-                result = drawMsg + " " + user + " " + "draws with " + computer;
+                result = user + " " + "draws with " + computer;
                 displayResult(result);
             } else if(computer == "rock") {
-                result = loseMsg + " " + computer + " " + "beats " + user;
+                result = computer + " " + "beats " + user;
                 computerScore++;
                 displayResult(result);
             } else if(computer == "paper") {
-                result = winMsg + " " + user + " " + "beats " + computer;
+                result = user + " " + "beats " + computer;
                 userScore++;
                 displayResult(result);
             }  
         break;  
     }
 }
+
 function displayResult(resultString) { //display scores and winner of 5 rounds
     document.getElementById("round-result").innerHTML = result;
     document.getElementById("user-score").innerHTML = userScore;
     document.getElementById("computer-score").innerHTML = computerScore;
     if(computerScore === 5 || userScore === 5) {
         if(userScore > computerScore) {
-            document.getElementById("display-winner").innerHTML = "<span style= 'color: green'>You Win!</span>";
+            document.getElementById("display-winner").innerHTML = "<span style= 'color: green'>You win! </span>";
         } else if(userScore < computerScore) {
             document.getElementById("display-winner").innerHTML = "<span style= 'color: red'>You lose! </span>";
         } else{
@@ -95,5 +91,5 @@ function displayResult(resultString) { //display scores and winner of 5 rounds
         computerScore = 0;
     }
 }
-//game round is triggered by user input
+
 pollUserInput();
